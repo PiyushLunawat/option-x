@@ -15,8 +15,9 @@ class Window extends Component {
       stockSymbol: props.stockSymbol, // Retrieve stockSymbol from props
       time: props.time, // Retrieve time array from props
       price: props.price, // Retrieve price array from props
-      quantity: props.quantity // Retrieve quantity array from props
-      
+      quantity: props.quantity, // Retrieve quantity array from props
+      currPrice: props.currPrice,  // Retrieve latest quantity from array
+      currQuantity: props.currQuantity  // Retrieve latest price from array
     };
   }
 
@@ -36,14 +37,16 @@ class Window extends Component {
         stockSymbol: this.props.stockSymbol,
         time: this.props.time,
         price: this.props.price,
-        quantity: this.props.quantity
+        quantity: this.props.quantity,
+        currPrice: this.props.currPrice,
+        currQuantity: this.props.currQuantity
       });
     }
   }
 
   render() {
   //  let time=this.state.stockData[0],price=this.state.stockData[1],quantity=[];
-  const { stockSymbol, time, yData, yTitle } = this.state;
+  const { stockSymbol, currPrice, currQuantity, time, yData, yTitle } = this.state;
   var w,h;
 
     function handleResize() {
@@ -104,8 +107,8 @@ window.addEventListener('resize', handleResize);
           <div className={this.state.stockSymbol?'current-data':'current-data active'}>
           <b>
           Stock : {this.state.stockSymbol}<br></br>
-              Price : <br></br>
-              Quantity : 
+              Price : {this.state.currPrice}<br></br>
+              Quantity : {this.state.currQuantity}
           </b>
           </div>
       </div>

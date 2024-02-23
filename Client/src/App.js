@@ -10,6 +10,9 @@ function App() {
   const [time, setTime] = useState(null);
   const [price, setPrice] = useState(null);
   const [quantity, setQuantity] = useState(null);
+  const [currPrice, setCurrPrice]= useState("");
+  const [currQuantity, setCurrQuantity]= useState("");
+
 
   const handleStockSymbol = (data) => {
     setStockSymbol(data);
@@ -20,23 +23,27 @@ function App() {
       try {
         const response = await axios.get('http://localhost:5681/data');
 
+        const n = response.data[`${stockSymbol}p`].length;
+        
+
         // Dynamically set state based on the stockSymbol
-        setTime(response.data[`${stockSymbol}t`]);
-        setPrice(response.data[`${stockSymbol}p`]);
-        setQuantity(response.data[`${stockSymbol}q`]);
+        setTime(response.data[`${stockSymbol}t`]); 
+        setPrice(response.data[`${stockSymbol}p`]);  setCurrPrice(response.data[`${stockSymbol}p`][n-1]);
+        setQuantity(response.data[`${stockSymbol}q`]);  setCurrQuantity(response.data[`${stockSymbol}q`][n-1]);
+
+        console.log(n,currPrice,currQuantity);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
     // Fetch data initially
     fetchData();
-
     // Fetch data every 5 seconds
     const interval = setInterval(fetchData, 5000);
 
     // Cleanup function to clear interval
     return () => clearInterval(interval);
+
   }, [stockSymbol]); // Run useEffect when stockSymbol changes
 
   return (
@@ -47,6 +54,8 @@ function App() {
         time={time}
         price={price}
         quantity={quantity}
+        currPrice={currPrice}
+        currQuantity={currQuantity}
       />
       <Footer />
     </div>
