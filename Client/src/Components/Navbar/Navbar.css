@@ -16,6 +16,7 @@
 
 h1{
     background-color: #f7f7f7;
+    cursor: pointer;
 }
 
 .logo{
@@ -31,11 +32,13 @@ h1{
 .menu-icon{
     height: 27px;
     background-color: #f7f7f7;
+    cursor: pointer;
 }
 
 .cross-icon{
     height: 27px;
     background-color: #f7f7f7;
+    cursor: pointer;
 }
 
 .stock-menu{
@@ -66,7 +69,7 @@ h1{
     display: block;
     widows: 100%;
     padding: 2rem 0;
-
+    cursor: pointer;
 }
 .stock-item:hover{
     background: rgba(0, 0, 0, 0.25);

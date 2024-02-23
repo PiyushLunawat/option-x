@@ -13,6 +13,7 @@ class Window extends Component {
     super(props);
     this.state = {
       stockSymbol: props.stockSymbol, // Retrieve stockSymbol from props
+      listItemClicked: props.listItemClicked, //Retrieve state of ListItem 
       time: props.time, // Retrieve time array from props
       price: props.price, // Retrieve price array from props
       quantity: props.quantity, // Retrieve quantity array from props
@@ -35,6 +36,7 @@ class Window extends Component {
       // Update the state with the new props
       this.setState({
         stockSymbol: this.props.stockSymbol,
+        listItemClicked: this.props.listItemClicked,
         time: this.props.time,
         price: this.props.price,
         quantity: this.props.quantity,
@@ -53,11 +55,11 @@ class Window extends Component {
       if (window.innerWidth < 768) {
         // Code to execute for smaller screen sizes
         w=window.innerWidth*.95;
-        h=window.innerWidth*1.25;
+        h=window.innerHeight*.5;
       } else {
         // Code to execute for larger screen sizes
         w=window.innerWidth*.6;
-        h=window.innerWidth*.3;
+        h=window.innerHeight*.7;
       }
     }
     handleResize();
@@ -68,14 +70,14 @@ window.addEventListener('resize', handleResize);
   return (
     <div className='Container'>
         
-      {/* {this.state.stockSymbol ? <div></div>:<div className='first-window'>
-        <div className={this.state.stockSymbol ?'heading-txt':'heading-txt active'}>
+      <div className='first-window'>
+        <div className={this.state.listItemClicked===true?'heading-txt':'heading-txt active'}>
         Trade With Unleashed Speed And Execution
         </div>
-        <img src={img} alt='IMAGE' className={this.state.stockSymbol ?'image':'image active'}></img>
-      </div>} */}
+        <img src={img} alt='IMAGE' className={this.state.listItemClicked===true?'image':'image active'}></img>
+      </div>
 
-      <div className={this.state.stockSymbol?'data-plot active':'data-plot'}>
+      <div className={this.state.listItemClicked===true?'data-plot active':'data-plot'}>
           <Plot 
               data={[
                 {
@@ -99,16 +101,15 @@ window.addEventListener('resize', handleResize);
           />
 
           <div className='switch-btn'>
-            <button onClick={() => this.handleYClick("Price")}>Price</button>
-            <button onClick={() => this.handleYClick("Quantity")}>Quantity</button>
+            <button className={yTitle === "Price" ? "clicked" : "blank"} onClick={() => this.handleYClick("Price")}>Price</button>
+             <button className={yTitle === "Quantity" ? "clicked" : "blank"} onClick={() => this.handleYClick("Quantity")}>Quantity</button>
           </div>
 
-            
-          <div className={this.state.stockSymbol?'current-data':'current-data active'}>
+          <div className={this.state.listItemClicked===true?'current-data':'current-data active'}>
           <b>
-          Stock : {this.state.stockSymbol}<br></br>
-              Price : {this.state.currPrice}<br></br>
-              Quantity : {this.state.currQuantity}
+            Stock : {this.state.stockSymbol}<br></br>
+            Price : {this.state.currPrice}<br></br>
+            Quantity : {this.state.currQuantity}
           </b>
           </div>
       </div>

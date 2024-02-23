@@ -7,6 +7,7 @@ import axios from 'axios';
 
 function App() {
   const [stockSymbol, setStockSymbol] = useState("HDFC");
+  const [listItemClicked, setListItemClicked] = useState(false);
   const [time, setTime] = useState(null);
   const [price, setPrice] = useState(null);
   const [quantity, setQuantity] = useState(null);
@@ -14,8 +15,9 @@ function App() {
   const [currQuantity, setCurrQuantity]= useState("");
 
 
-  const handleStockSymbol = (data) => {
-    setStockSymbol(data);
+  const handleStockSymbol = (data, listItemClicked) => {
+    setStockSymbol(data);  // Update Stock Symbol
+    setListItemClicked(listItemClicked); // Update listItemClicked state
   };
 
   useEffect(() => {
@@ -25,13 +27,11 @@ function App() {
 
         const n = response.data[`${stockSymbol}p`].length;
         
-
         // Dynamically set state based on the stockSymbol
         setTime(response.data[`${stockSymbol}t`]); 
         setPrice(response.data[`${stockSymbol}p`]);  setCurrPrice(response.data[`${stockSymbol}p`][n-1]);
         setQuantity(response.data[`${stockSymbol}q`]);  setCurrQuantity(response.data[`${stockSymbol}q`][n-1]);
 
-        console.log(n,currPrice,currQuantity);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -51,6 +51,7 @@ function App() {
       <Navbar onData={handleStockSymbol} />
       <Window
         stockSymbol={stockSymbol}
+        listItemClicked={listItemClicked}
         time={time}
         price={price}
         quantity={quantity}
