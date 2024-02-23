@@ -1,0 +1,119 @@
+.first-window{
+    padding: 25vh 0;
+}
+
+.heading-txt{
+    position: relative;
+    left: 100%;
+    display: inline-block;
+    width: 50vh;
+    font-size: 10vh;
+    font-style: italic;
+    font-family: fantasy;
+    z-index: -1;
+    transition: all 0.9s ease-in-out;
+
+}
+
+.heading-txt.active{
+    left: -1%;
+}
+
+.image{
+    right: 100%;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    width: 50vw;
+    transition: all 0.9s ease-in-out;
+    z-index: -1;
+    /* padding: 0 0 0 4vw; */
+}
+
+.image.active{
+    right: -1%;
+}
+
+.data-plot{
+    display: inline-block;
+    top: 0%;
+    left: 100%;
+    position: fixed;
+    padding: 3% 0;
+    z-index: -1;
+    width: 75%;
+    height: 100%;
+    transition: all 0.9s ease-in-out;
+}
+
+.data-plot.active{
+    left: 0%;
+}
+
+.switch-btn {
+    width: 66%;
+    display: flex;
+    background: white;
+    margin: 0 17% 0;
+  }
+  
+  .switch-btn button {
+    flex: 1; /* Each button takes up equal space */
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .switch-btn button:first-child {
+    border-right: 1px solid #ccc; /* Add a border between buttons */
+  }
+  
+  .switch-btn button:active {
+    background-color: #000000; 
+    color: #fff;
+  }
+  
+
+@media screen and (max-width: 768px){
+    .data-plot{
+        width: 100%;
+    }
+    .heading-txt{
+        display:none;
+    }
+    .heading-txt.active{
+        display: contents;
+    }
+    .switch-btn{
+        width: 58%;
+    margin: 0 21% 0;
+    }
+    .data-plot{
+        padding: 15% 0;
+    }
+    .current-data{
+        top: 5%;
+        position: relative;
+    }
+}
+
+@media screen and (min-width: 769px){
+    .current-data{
+        display: inline-block;
+        top: 36%;
+        left: 42%;
+        position: fixed;
+        padding: 5% 0;
+        z-index: -1;
+        width: 75%;
+        height: 100%;
+        transition: all 0.9s ease-in-out;
+    }
+    
+    .current-data.active{
+        left:100%;
+    }
+}
