@@ -1,13 +1,11 @@
-import { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Style.css';
 import Navbar from './Components/Navbar/Navbar';
 import Window from './Components/Window/Window';
 import Footer from './Components/Footer/Footer';
 import axios from 'axios';
 
-
 function App() {
-
   const [stockSymbol, setStockSymbol] = useState("HDFC");
   const [time, setTime] = useState(null);
   const [price, setPrice] = useState(null);
@@ -22,11 +20,10 @@ function App() {
       try {
         const response = await axios.get('http://localhost:5681/data');
 
-        setTime(response.data.HDFCt);
-        setPrice(response.data.HDFCp);
-        setQuantity(response.data.HDFCq);
-        // console.log(response.data.HDFCt);
-
+        // Dynamically set state based on the stockSymbol
+        setTime(response.data[`${stockSymbol}t`]);
+        setPrice(response.data[`${stockSymbol}p`]);
+        setQuantity(response.data[`${stockSymbol}q`]);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -40,17 +37,18 @@ function App() {
 
     // Cleanup function to clear interval
     return () => clearInterval(interval);
-  }, []);
+  }, [stockSymbol]); // Run useEffect when stockSymbol changes
 
   return (
     <div className="App">
-      <Navbar onData={handleStockSymbol}/>
-      <Window stockSymbol={stockSymbol} 
+      <Navbar onData={handleStockSymbol} />
+      <Window
+        stockSymbol={stockSymbol}
         time={time}
         price={price}
         quantity={quantity}
       />
-      <Footer/>
+      <Footer />
     </div>
   );
 }

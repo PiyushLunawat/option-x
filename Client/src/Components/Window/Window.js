@@ -80,7 +80,7 @@ window.addEventListener('resize', handleResize);
               data={[
                 {
                 x: this.props.time,
-                   y: this.props.quantity,
+                   y: yData,
                    type: 'scatter',
                    marker: {color: 'red'},
                  },
@@ -107,7 +107,7 @@ window.addEventListener('resize', handleResize);
                 },
                 yaxis: {
                   range: [0, 300],
-                  title: "metric",
+                  title: yTitle,
                 },hovermode: 'closest'
               }} 
               config={{scrollZoom:true,responsive: true,}}
