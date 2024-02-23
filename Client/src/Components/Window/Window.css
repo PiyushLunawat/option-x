@@ -81,12 +81,12 @@
     .data-plot{
         width: 100%;
     }
-    .heading-txt{
+    /* .heading-txt{
         display:none;
     }
     .heading-txt.active{
         display: contents;
-    }
+    } */
     .switch-btn{
         width: 58%;
     margin: 0 21% 0;
@@ -103,14 +103,16 @@
 @media screen and (min-width: 769px){
     .current-data{
         display: inline-block;
-        top: 36%;
+        top: 30%;
         left: 42%;
         position: fixed;
         padding: 5% 0;
-        z-index: -1;
         width: 75%;
         height: 100%;
         transition: all 0.9s ease-in-out;
+        font-size: 6vh;
+        font-family: monospace;
+        z-index: -1;
     }
     
     .current-data.active{

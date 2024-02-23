@@ -8,6 +8,8 @@ import img from "../../Assets/image.png"
 class Window extends Component {
 
   constructor(props) {
+
+
     super(props);
     this.state = {
       stockSymbol: props.stockSymbol, // Retrieve stockSymbol from props
@@ -39,13 +41,10 @@ class Window extends Component {
     }
   }
 
-
   render() {
-
   //  let time=this.state.stockData[0],price=this.state.stockData[1],quantity=[];
   const { stockSymbol, time, yData, yTitle } = this.state;
-
-    var w,h;
+  var w,h;
 
     function handleResize() {
       if (window.innerWidth < 768) {
@@ -59,14 +58,12 @@ class Window extends Component {
       }
     }
     handleResize();
-
-    console.log(this.state.stockData)
 // Add event listener for window resize
 window.addEventListener('resize', handleResize);
 
 
-    return (
-      <div className='Container'>
+  return (
+    <div className='Container'>
         
       {/* {this.state.stockSymbol ? <div></div>:<div className='first-window'>
         <div className={this.state.stockSymbol ?'heading-txt':'heading-txt active'}>
@@ -79,56 +76,40 @@ window.addEventListener('resize', handleResize);
           <Plot 
               data={[
                 {
-                x: this.props.time,
-                   y: yData,
-                   type: 'scatter',
-                   marker: {color: 'red'},
+                x: this.props.time, y: this.state.yData || this.state.price, type: 'scatter', marker: {color: 'red'},
                  },
               ]}
               layout={{   
-                width: w,
-                height: h,    
+                width: w, height: h,    
                 font: {
-                 color: '#000',
-                 size: 11.5,
-                  family: 'monospace',
+                 color: '#000', size: 11.5, family: 'monospace',
                 },
-                paper_bgcolor: '#f7f7f7',
-                plot_bgcolor: 'white',
+                paper_bgcolor: '#f7f7f7', plot_bgcolor: 'white',
                 xaxis: {
-                  title: 'Time',
-                  tickmode: 'auto',
-                 tick0: 0,
-                 dtick: 10,
-                 rangemode: 'nonnegative',
-                 mirror: true,
-                 ticks: 'outside',
-                  showline: false,
+                  title: 'Time', tickmode: 'auto', tick0: 0, dtick: 10, mirror: true, ticks: 'outside', showline: false,
                 },
                 yaxis: {
-                  range: [0, 300],
-                  title: yTitle,
+                  range: [0, 300], title: yTitle || "Price",
                 },hovermode: 'closest'
               }} 
               config={{scrollZoom:true,responsive: true,}}
-            />
+          />
 
-<div className='switch-btn'>
-  <button onClick={() => this.handleYClick("Price")}>Price</button>
-  <button onClick={() => this.handleYClick("Quantity")}>Quantity</button>
-</div>
+          <div className='switch-btn'>
+            <button onClick={() => this.handleYClick("Price")}>Price</button>
+            <button onClick={() => this.handleYClick("Quantity")}>Quantity</button>
+          </div>
 
             
-            <div className={this.state.stockSymbol?'current-data':'current-data active'}>
-        <div className='data-txt>'>
-          {this.state.stockSymbol}<br></br>
-          Price<br></br>
-          Quantity
-        </div>
+          <div className={this.state.stockSymbol?'current-data':'current-data active'}>
+          <b>
+          Stock : {this.state.stockSymbol}<br></br>
+              Price : <br></br>
+              Quantity : 
+          </b>
+          </div>
       </div>
-      </div>
-      
-      </div>
+    </div>
     );
   }
 }

@@ -9,14 +9,14 @@ class Navbar extends Component {
     clicked: false,
     selectedStock: null // Add state to track the selected stock
   };
-
+ // Open and CLose the hamburger Menu
   handleClick = () => {
     this.setState({ clicked: !this.state.clicked });
   };
 
   handleStockClick = (stock) => { // Event handler for stock item click
     this.setState({ selectedStock: stock });
-    this.setState({ clicked: !this.state.clicked });
+    this.setState({ clicked: !this.state.clicked }); // Simultanously close the MEnu
     this.props.onData(stock); // Invoke the callback function with the selected stock symbol
   };
 
@@ -25,15 +25,14 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar-container">
+
         <img src={logo} alt="OX" className="logo"></img>
         <h1>OptionX</h1>
+
         <div className="ham-menu" onClick={this.handleClick}>
-          <img
-            src={this.state.clicked ? cross : menu}
-            alt={this.state.clicked ? "X" : "M"}
-            className="menu-icon"
-          ></img>
+          <img src={this.state.clicked ? cross : menu} alt={this.state.clicked ? "X" : "M"} className="menu-icon"></img>
         </div>
+        
         <ul className={this.state.clicked ? "stock-menu active" : "stock-menu"}>
           <li className="stock-item" onClick={() => this.handleStockClick("HDFC")}><b>HDFC</b></li>
           <li className="stock-item" onClick={() => this.handleStockClick("GMRINFRA")}><b>GMRINFRA</b></li>

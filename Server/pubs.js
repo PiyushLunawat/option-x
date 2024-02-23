@@ -1,9 +1,12 @@
 const redis = require('redis');
+
+// Create Publisher Client
 const publisher = redis.createClient({
   url: 'redis://default:kFvb6T7bJfUGgIqALzB0X9M84jyyhIe1@redis-15724.c301.ap-south-1-1.ec2.cloud.redislabs.com:15724',
 });
 
 (async () => {
+  // Intialize Five Stocks
   const stocks = ['HDFC', 'GMRINFRA', 'TATAMOTORS', 'LIC', 'RELIANCE'];
 
   await publisher.connect();
@@ -29,7 +32,7 @@ const publisher = redis.createClient({
       
       // Publish the serialized stock data to the Redis channel
       publisher.publish('stock_data', stockDataString);
-      console.log("Published stock data:", stockData);
+      // console.log("Published stock data:", stockData);
 
       // Store the serialized stock data in a Redis list
       publisher.lPush(`stock_data_${stock}`, stockDataString, (err, reply) => {
