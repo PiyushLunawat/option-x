@@ -49,6 +49,7 @@
 
 .data-plot.active{
     left: 0%;
+    z-index: revert;
 }
 
 .switch-btn {
