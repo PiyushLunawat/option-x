@@ -24,13 +24,11 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:5681/data');
-
-        const n = response.data[`${stockSymbol}p`].length;
         
         // Dynamically set state based on the stockSymbol
-        setTime(response.data[`${stockSymbol}t`]); 
-        setPrice(response.data[`${stockSymbol}p`]);  setCurrPrice(response.data[`${stockSymbol}p`][n-1]);
-        setQuantity(response.data[`${stockSymbol}q`]);  setCurrQuantity(response.data[`${stockSymbol}q`][n-1]);
+        setTime((response.data[`${stockSymbol}t`]).map(t => new Date(t * 1000))); 
+        setPrice(response.data[`${stockSymbol}p`]);  setCurrPrice(response.data[`${stockSymbol}p`][0]);
+        setQuantity(response.data[`${stockSymbol}q`]);  setCurrQuantity(response.data[`${stockSymbol}q`][0]);
 
       } catch (error) {
         console.error('Error fetching data:', error);

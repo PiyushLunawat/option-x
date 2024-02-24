@@ -26,7 +26,6 @@ class Window extends Component {
     // Update yData and yTitle based on the button clicked
     if (selected === 'Price') {
       this.setState({ yData: this.state.price, yTitle: "Price" });
-      console.log("ckckck");
     } else if (selected === 'Quantity') {
       this.setState({ yData: this.state.quantity, yTitle: "Quantity" });
     }
